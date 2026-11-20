@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+     <link href="https://framerusercontent.com/images/obuk2bAkd00UE1qe5MwIqFKsO4.png" rel="icon" media="(prefers-color-scheme: light)">
+    <link href="https://framerusercontent.com/images/8FqV8tRHe0yQRT1QtRXPOTwQ4.png" rel="icon" media="(prefers-color-scheme: dark)">
+
+    <title>FreightX - AI For Logistics</title>
+
+    
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+html {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+        body {
+            width: 100%;
+            min-width: 0;
+            overflow-x: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #262626;
+            background: #ffffff;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 15px 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #ececec;
+        }
+
+        .FreightX-logo {
+            display: block;
+            width: 150px;
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            width: 100%;
+            min-height: 520px;
+            background: #111111;
+            display: flex;
+            align-items: center;
+            padding: 60px 6%;
+        }
+
+        .hero-text {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .hero-eyebrow {
+            color: #e53935;
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .hero-headline {
+            width: 100%;
+            max-width: 760px;
+            color: #ffffff;
+            font-size: clamp(32px, 4vw, 52px);
+            line-height: 1.12;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero-sub {
+            width: 100%;
+            max-width: 720px;
+            color: #dedede;
+            font-size: 18px;
+            line-height: 29px;
+            margin-bottom: 28px;
+        }
+
+        .hero-button {
+            width: 100%;
+        }
+
+        .hero-button a {
+            display: inline-block;
+            background: #e53935;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 700;
+            padding: 14px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .hero-button a:hover {
+            background: #c62828;
+        }
+
+
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+            align-items: start;
+            gap: 70px;
+            padding: 50px 40px 70px;
+        }
+
+
+        /* =========================================================
+           LEFT CONTENT
+        ========================================================= */
+
+        .left-col {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .main-title {
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 700;
+            color: #171717;
+            margin-bottom: 18px;
+        }
+
+        .section-heading {
+            color: #000000;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================================================
+           FEATURES
+        ========================================================= */
+
+        .features {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            padding: 15px 0 25px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .feature-title {
+            font-size: 17px;
+            line-height: 22px;
+            font-weight: 700;
+            color: #171717;
+        }
+
+        .feature-number {
+            color: #e53935;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            line-height: 22px;
+            color: #666666;
+            margin-top: 7px;
+        }
+
+
+        /* =========================================================
+           STATISTICS
+        ========================================================= */
+
+        .statistics {
+            width: 100%;
+            background: #f7f7f7;
+            border-top: 1px solid #ededed;
+            border-bottom: 1px solid #ededed;
+            padding: 30px 20px;
+            margin: 35px 0 45px;
+        }
+
+        .statistics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            line-height: 34px;
+            font-weight: 700;
+            color: #e53935;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            line-height: 18px;
+            color: #626262;
+            margin-top: 4px;
+        }
+
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta-section {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0 20px;
+        }
+
+        .cta-title {
+            font-size: 27px;
+            line-height: 35px;
+            font-weight: 700;
+            color: #171717;
+        }
+
+        .cta-description {
+            width: 100%;
+            max-width: 490px;
+            margin: 13px auto 0;
+            font-size: 16px;
+            line-height: 25px;
+            color: #666666;
+        }
+
+
+        /* =========================================================
+           RIGHT FORM
+        ========================================================= */
+
+        .right-col {
+            width: 100%;
+            min-width: 0;
+            position: relative;
+            z-index: 3;
+            margin-top: -110px;
+        }
+
+        .reg-form {
+            width: 100%;
+            background-color: rgb(199, 182, 182);
+            padding: 36px;
+            border-radius: 17px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .form-field {
+            flex: 1 1 0;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+        }
+
+        .form-row .form-field {
+            margin-bottom: 0;
+        }
+
+        .form-field label {
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .req {
+            color: #e53935;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid #c8c4d0;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 12.5px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333333;
+            background: #ffffff;
+            outline: none;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: #e53935;
+        }
+
+        .form-field input.f-err,
+        .form-field select.f-err,
+        .form-field textarea.f-err {
+            border-color: #e2231a;
+        }
+
+        .form-field select {
+            min-height: 40px;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .field-err-msg {
+            font-size: 9.5px;
+            color: #e2231a;
+            margin-top: 3px;
+            display: none;
+        }
+
+        .field-err-msg.show {
+            display: block;
+        }
+
+
+        /* =========================================================
+           CONSENT
+        ========================================================= */
+
+        .consent-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .consent-row input[type="checkbox"] {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #e53935;
+        }
+
+        .consent-row label {
+            font-size: 9.5px;
+            line-height: 1.5;
+            color: #4a4a4a;
+            cursor: pointer;
+        }
+
+        .consent-row a {
+            color: #e53935;
+        }
+
+        .consent-err-msg {
+            font-size: 9.5px;
+            color: #e2231a;
+            display: none;
+            margin-bottom: 8px;
+        }
+
+        .consent-err-msg.show {
+            display: block;
+        }
+
+
+        /* =========================================================
+           SUBMIT
+        ========================================================= */
+
+        .submit-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .submit-btn {
+            background: #e53935;
+            color: #ffffff;
+            border: none;
+            padding: 11px 28px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            transition: background 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #c62828;
+        }
+
+        .mandatory-note {
+            font-size: 9.5px;
+            color: #666666;
+        }
+
+        .mandatory-note span {
+            color: #e53935;
+        }
+
+
+        /* =========================================================
+           SUCCESS MESSAGE
+        ========================================================= */
+
+        .form-success {
+            display: none;
+            width: 100%;
+            min-height: 250px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 25px;
+            text-align: center;
+            background: #f4eef8;
+            border-radius: 17px;
+        }
+
+        .form-success .tick {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #e53935;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .form-success .tick svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .form-success h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-success p {
+            font-size: 12.5px;
+            color: #555555;
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+            width: 100%;
+            background-color: #111111;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: block;
+            width: 145px;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .footer-tagline {
+            font-size: 12px;
+            line-height: 19px;
+            color: #aaaaaa;
+            margin-top: 13px;
+        }
+
+        .footer-links {
+            font-size: 11px;
+            line-height: 18px;
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #dddddd;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-links .separator {
+            color: #666666;
+            padding: 0 10px;
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .hero {
+                padding: 55px 5%;
+            }
+
+            .content-wrapper {
+                grid-template-columns: minmax(0, 1fr) minmax(330px, 440px);
+                gap: 40px;
+                padding: 50px 30px 60px;
+            }
+
+            .right-col {
+                margin-top: -80px;
+            }
+
+            .reg-form {
+                padding: 28px;
+            }
+
+        }
+
+
+        /* =========================================================
+           TABLET / SMALL LAPTOP
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .header {
+                padding: 14px 25px;
+            }
+
+            .FreightX-logo {
+                width: 145px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 55px 30px 70px;
+            }
+
+            .hero-text {
+                max-width: 750px;
+            }
+
+            .hero-headline {
+                font-size: 40px;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 45px 30px 60px;
+            }
+
+            .right-col {
+                max-width: 650px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .left-col {
+                max-width: 750px;
+                margin: 0 auto;
+            }
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 13px 18px;
+            }
+
+            .FreightX-logo {
+                width: 135px;
+            }
+
+
+            /* HERO */
+
+            .hero {
+                padding: 40px 20px 50px;
+            }
+
+            .hero-eyebrow {
+                font-size: 13px;
+                line-height: 18px;
+                margin-bottom: 10px;
+            }
+
+            .hero-headline {
+                font-size: 30px;
+                line-height: 1.18;
+                margin-bottom: 18px;
+            }
+
+            .hero-sub {
+                font-size: 16px;
+                line-height: 25px;
+                margin-bottom: 24px;
+            }
+
+            .hero-button a {
+                width: 100%;
+                text-align: center;
+                padding: 13px 15px;
+                font-size: 12px;
+            }
+
+
+            /* CONTENT */
+
+            .content-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                padding: 35px 18px 45px;
+            }
+
+            .main-title {
+                font-size: 24px;
+                line-height: 31px;
+                margin-bottom: 30px;
+            }
+
+            .section-heading {
+                font-size: 15px;
+                line-height: 1.6;
+                margin-bottom: 25px;
+            }
+
+
+            /* FEATURES */
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin-bottom: 30px;
+            }
+
+            .feature {
+                padding: 15px 0 20px;
+            }
+
+            .feature-title {
+                font-size: 14px;
+            }
+
+            .feature-description {
+                font-size: 13px;
+                line-height: 21px;
+            }
+
+
+            /* STATISTICS */
+
+            .statistics {
+                padding: 25px 12px;
+                margin: 25px 0 35px;
+            }
+
+            .statistics-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .stat-number {
+                font-size: 26px;
+            }
+
+
+            /* CTA */
+
+            .cta-title {
+                font-size: 23px;
+                line-height: 31px;
+            }
+
+            .cta-description {
+                font-size: 14px;
+                line-height: 22px;
+            }
+
+
+            /* FORM */
+
+            .right-col {
+                width: 100%;
+            }
+
+            .reg-form {
+                padding: 24px 18px;
+                border-radius: 14px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+                margin-bottom: 0;
+            }
+
+            .form-row .form-field {
+                margin-bottom: 12px;
+            }
+
+            .form-field {
+                margin-bottom: 12px;
+            }
+
+            .form-field label {
+                font-size: 12px;
+                margin-bottom: 7px;
+            }
+
+            .form-field input,
+            .form-field select,
+            .form-field textarea {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .consent-row label {
+                font-size: 9px;
+            }
+
+            .submit-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            .mandatory-note {
+                text-align: center;
+            }
+
+
+            /* SUCCESS */
+
+            .form-success {
+                min-height: 220px;
+                padding: 30px 20px;
+            }
+
+
+            /* FOOTER */
+
+            .footer {
+                padding: 28px 16px 22px;
+            }
+
+            .footer-logo {
+                width: 135px;
+            }
+
+        }
+
+
+        /* =========================================================
+           VERY SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 380px) {
+
+            .hero {
+                padding: 35px 16px 45px;
+            }
+
+            .hero-headline {
+                font-size: 26px;
+            }
+
+            .hero-sub {
+                font-size: 15px;
+                line-height: 23px;
+            }
+
+            .content-wrapper {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .reg-form {
+                padding: 22px 15px;
+            }
+
+            .cta-title {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header class="header">
+
+       
+
+        <a href="https://www.freightx.ai/" target="_blank">
+    <img class="FreightX-logo"  alt="FreightX" src="Image/freightx_ai.png">
+</a>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <div class="hero-eyebrow">
+                AI FOR LOGISTICS
+            </div>
+
+            <h1 class="hero-headline">
+                Tired of 12-hour days chasing freight manually?
+            </h1>
+
+            <p class="hero-sub">
+                Meet Ana, your AI logistics operator. FreightX helps
+                automate repetitive freight workflows so your team can
+                spend less time chasing tasks and more time moving
+                business forward.
+            </p>
+
+            <div class="hero-button">
+
+                <a
+                    href="#leadForm"
+                    target="_blank"
+                    
+                >
+                    BOOK A 20-MINUTE WALKTHROUGH
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="content-wrapper">
+
+
+        <!-- LEFT COLUMN -->
+
+        <div class="left-col">
+
+            <div class="main-title">
+                Let AI handle the repetitive work.
+            </div>
+
+            <p class="section-heading">
+                FreightX connects with the systems your logistics team
+                already uses and learns your workflows — helping automate
+                the tasks that consume hours every day.
+            </p>                                     
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        <span class="feature-number">01</span>
+                        &nbsp;&nbsp;Autopilot Bids
+                    </div>
+
+                    <div class="feature-description">
+                        Automate carrier outreach, collect responses and
+                        analyze rates.
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        <span class="feature-number">02</span>
+                        &nbsp;&nbsp;Shipment Tracking
+                    </div>
+
+                    <div class="feature-description">
+                        Monitor shipments and proactively handle tracking
+                        updates.
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        <span class="feature-number">03</span>
+                        &nbsp;&nbsp;POD Collection
+                    </div>
+
+                    <div class="feature-description">
+                        Collect and verify proof of delivery automatically.
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-title">
+                        <span class="feature-number">04</span>
+                        &nbsp;&nbsp;Automated Invoicing
+                    </div>
+
+                    <div class="feature-description">
+                        Streamline freight billing and reduce manual
+                        processing.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STATISTICS -->
+
+            <div class="statistics">
+
+                <div class="statistics-grid">
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            80K+
+                        </div>
+
+                        <div class="stat-label">
+                            SHIPMENTS
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            95%
+                        </div>
+
+                        <div class="stat-label">
+                            ACCURACY
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            50%
+                        </div>
+
+                        <div class="stat-label">
+                            TIME SAVED
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CTA -->
+
+            <div class="cta-section">
+
+                <div class="cta-title">
+                    Ready to automate your freight workflow?
+                </div>
+
+                <div class="cta-description">
+                    See how FreightX can help your logistics team
+                    automate repetitive work with AI.
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             RIGHT COLUMN / FORM
+        ====================================================== -->
+
+        <div class="right-col">
+
+
+            <form
+                class="reg-form"
+                id="leadForm"
+                novalidate
+            >
+
+
+                <!-- FIRST / LAST NAME -->
+
+                <div class="form-row">
+
+                    <div class="form-field">
+
+                        <label for="firstName">
+                            First Name
+                            <span class="req">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                        >
+
+                        <div
+                            class="field-err-msg"
+                            id="err-firstName"
+                        >
+                            This field is required.
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="lastName">
+                            Last Name
+                            <span class="req">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                        >
+
+                        <div
+                            class="field-err-msg"
+                            id="err-lastName"
+                        >
+                            This field is required.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- JOB / COMPANY -->
+
+                <div class="form-row">
+
+                    <div class="form-field">
+
+                        <label for="jobTitle">
+                            Job Title
+                            <span class="req">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="jobTitle"
+                            name="jobTitle"
+                        >
+
+                        <div
+                            class="field-err-msg"
+                            id="err-jobTitle"
+                        >
+                            This field is required.
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="companyName">
+                            Company Name
+                            <span class="req">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="companyName"
+                            name="companyName"
+                        >
+
+                        <div
+                            class="field-err-msg"
+                            id="err-companyName"
+                        >
+                            This field is required.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PHONE / EMAIL -->
+
+                <div class="form-row">
+
+                    <div class="form-field">
+
+                        <label for="phone">
+                            Phone Number
+                            <span class="req">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                        >
+
+                        <div
+                            class="field-err-msg"
+                            id="err-phone"
+                        >
+                            Enter a valid 6–12 digit number.
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="email">
+                            Business Email
+                            <span class="req">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                        >
+
+                        <div
+                            class="field-err-msg"
+                            id="err-email"
+                        >
+                            Use a valid business email.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMPLOYEES -->
+
+                <div class="form-field">
+
+                    <label for="employees">
+                        Number of Employees
+                        <span class="req">*</span>
+                    </label>
+
+                    <select
+                        id="employees"
+                        name="employees"
+                    >
+
+                        <option value="">
+                            Select...
+                        </option>
+
+                        <option value="0">
+                            No Employees
+                        </option>
+
+                        <option value="9">
+                            1-9 Employees
+                        </option>
+
+                        <option value="19">
+                            10-19 Employees
+                        </option>
+
+                        <option value="49">
+                            20-49 Employees
+                        </option>
+
+                        <option value="99">
+                            50-99 Employees
+                        </option>
+
+                        <option value="249">
+                            100-249 Employees
+                        </option>
+
+                        <option value="499">
+                            250-499 Employees
+                        </option>
+
+                        <option value="999">
+                            500-999 Employees
+                        </option>
+
+                        <option value="2999">
+                            1000-2999 Employees
+                        </option>
+
+                        <option value="3000">
+                            3000+ Employees
+                        </option>
+
+                    </select>
+
+                    <div
+                        class="field-err-msg"
+                        id="err-employees"
+                    >
+                        Please select an option.
+                    </div>
+
+                </div>
+
+
+
+                <!-- COUNTRY -->
+
+                <div class="form-field">
+
+                    <label for="country">
+                        Country/Market
+                        <span class="req">*</span>
+                    </label>
+
+                    <select
+    id="country"
+    name="country"
+>
+
+    <option value="">
+        Select...
+    </option>
+
+    <option value="AF">Afghanistan</option>
+    <option value="AL">Albania</option>
+    <option value="DZ">Algeria</option>
+    <option value="AS">American Samoa</option>
+    <option value="AD">Andorra</option>
+    <option value="AO">Angola</option>
+    <option value="AI">Anguilla</option>
+    <option value="AQ">Antarctica</option>
+    <option value="AG">Antigua and Barbuda</option>
+    <option value="AR">Argentina</option>
+    <option value="AM">Armenia</option>
+    <option value="AW">Aruba</option>
+    <option value="AU">Australia</option>
+    <option value="AT">Austria</option>
+    <option value="AZ">Azerbaijan</option>
+    <option value="BS">Bahamas</option>
+    <option value="BH">Bahrain</option>
+    <option value="BD">Bangladesh</option>
+    <option value="BB">Barbados</option>
+    <option value="BY">Belarus</option>
+    <option value="BE">Belgium</option>
+    <option value="BZ">Belize</option>
+    <option value="BJ">Benin</option>
+    <option value="BM">Bermuda</option>
+    <option value="BT">Bhutan</option>
+    <option value="BO">Bolivia, Plurinational State of</option>
+    <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+    <option value="BA">Bosnia and Herzegovina</option>
+    <option value="BW">Botswana</option>
+    <option value="BV">Bouvet Island</option>
+    <option value="BR">Brazil</option>
+    <option value="IO">British Indian Ocean Territory</option>
+    <option value="BN">Brunei Darussalam</option>
+    <option value="BG">Bulgaria</option>
+    <option value="BF">Burkina Faso</option>
+    <option value="BI">Burundi</option>
+    <option value="CV">Cabo Verde</option>
+    <option value="KH">Cambodia</option>
+    <option value="CM">Cameroon</option>
+    <option value="CA">Canada</option>
+    <option value="KY">Cayman Islands</option>
+    <option value="CF">Central African Republic</option>
+    <option value="TD">Chad</option>
+    <option value="CL">Chile</option>
+    <option value="CN">China</option>
+    <option value="CX">Christmas Island</option>
+    <option value="CC">Cocos (Keeling) Islands</option>
+    <option value="CO">Colombia</option>
+    <option value="KM">Comoros</option>
+    <option value="CG">Congo</option>
+    <option value="CD">Congo, The Democratic Republic of the</option>
+    <option value="CK">Cook Islands</option>
+    <option value="CR">Costa Rica</option>
+    <option value="HR">Croatia</option>
+    <option value="CU">Cuba</option>
+    <option value="CW">Curaçao</option>
+    <option value="CY">Cyprus</option>
+    <option value="CZ">Czechia</option>
+    <option value="CI">Côte d'Ivoire</option>
+    <option value="DK">Denmark</option>
+    <option value="DJ">Djibouti</option>
+    <option value="DM">Dominica</option>
+    <option value="DO">Dominican Republic</option>
+    <option value="EC">Ecuador</option>
+    <option value="EG">Egypt</option>
+    <option value="SV">El Salvador</option>
+    <option value="GQ">Equatorial Guinea</option>
+    <option value="ER">Eritrea</option>
+    <option value="EE">Estonia</option>
+    <option value="SZ">Eswatini</option>
+    <option value="ET">Ethiopia</option>
+    <option value="FK">Falkland Islands (Malvinas)</option>
+    <option value="FO">Faroe Islands</option>
+    <option value="FJ">Fiji</option>
+    <option value="FI">Finland</option>
+    <option value="FR">France</option>
+    <option value="GF">French Guiana</option>
+    <option value="PF">French Polynesia</option>
+    <option value="TF">French Southern Territories</option>
+    <option value="GA">Gabon</option>
+    <option value="GM">Gambia</option>
+    <option value="GE">Georgia</option>
+    <option value="DE">Germany</option>
+    <option value="GH">Ghana</option>
+    <option value="GI">Gibraltar</option>
+    <option value="GR">Greece</option>
+    <option value="GL">Greenland</option>
+    <option value="GD">Grenada</option>
+    <option value="GP">Guadeloupe</option>
+    <option value="GU">Guam</option>
+    <option value="GT">Guatemala</option>
+    <option value="GG">Guernsey</option>
+    <option value="GN">Guinea</option>
+    <option value="GW">Guinea-Bissau</option>
+    <option value="GY">Guyana</option>
+    <option value="HT">Haiti</option>
+    <option value="HM">Heard Island and McDonald Islands</option>
+    <option value="VA">Holy See (Vatican City State)</option>
+    <option value="HN">Honduras</option>
+    <option value="HK">Hong Kong</option>
+    <option value="HU">Hungary</option>
+    <option value="IS">Iceland</option>
+    <option value="IN">India</option>
+    <option value="ID">Indonesia</option>
+    <option value="IR">Iran, Islamic Republic of</option>
+    <option value="IQ">Iraq</option>
+    <option value="IE">Ireland</option>
+    <option value="IM">Isle of Man</option>
+    <option value="IL">Israel</option>
+    <option value="IT">Italy</option>
+    <option value="JM">Jamaica</option>
+    <option value="JP">Japan</option>
+    <option value="JE">Jersey</option>
+    <option value="JO">Jordan</option>
+    <option value="KZ">Kazakhstan</option>
+    <option value="KE">Kenya</option>
+    <option value="KI">Kiribati</option>
+    <option value="KP">Korea, Democratic People's Republic of</option>
+    <option value="KR">Korea, Republic of</option>
+    <option value="XK">Kosovo</option>
+    <option value="KW">Kuwait</option>
+    <option value="KG">Kyrgyzstan</option>
+    <option value="LA">Lao People's Democratic Republic</option>
+    <option value="LV">Latvia</option>
+    <option value="LB">Lebanon</option>
+    <option value="LS">Lesotho</option>
+    <option value="LR">Liberia</option>
+    <option value="LY">Libya</option>
+    <option value="LI">Liechtenstein</option>
+    <option value="LT">Lithuania</option>
+    <option value="LU">Luxembourg</option>
+    <option value="MO">Macao</option>
+    <option value="MG">Madagascar</option>
+    <option value="MW">Malawi</option>
+    <option value="MY">Malaysia</option>
+    <option value="MV">Maldives</option>
+    <option value="ML">Mali</option>
+    <option value="MT">Malta</option>
+    <option value="MH">Marshall Islands</option>
+    <option value="MQ">Martinique</option>
+    <option value="MR">Mauritania</option>
+    <option value="MU">Mauritius</option>
+    <option value="YT">Mayotte</option>
+    <option value="MX">Mexico</option>
+    <option value="FM">Micronesia, Federated States of</option>
+    <option value="MD">Moldova, Republic of</option>
+    <option value="MC">Monaco</option>
+    <option value="MN">Mongolia</option>
+    <option value="ME">Montenegro</option>
+    <option value="MS">Montserrat</option>
+    <option value="MA">Morocco</option>
+    <option value="MZ">Mozambique</option>
+    <option value="MM">Myanmar</option>
+    <option value="NA">Namibia</option>
+    <option value="NR">Nauru</option>
+    <option value="NP">Nepal</option>
+    <option value="NL">Netherlands</option>
+    <option value="NC">New Caledonia</option>
+    <option value="NZ">New Zealand</option>
+    <option value="NI">Nicaragua</option>
+    <option value="NE">Niger</option>
+    <option value="NG">Nigeria</option>
+    <option value="NU">Niue</option>
+    <option value="NF">Norfolk Island</option>
+    <option value="MK">North Macedonia</option>
+    <option value="MP">Northern Mariana Islands</option>
+    <option value="NO">Norway</option>
+    <option value="OM">Oman</option>
+    <option value="PK">Pakistan</option>
+    <option value="PW">Palau</option>
+    <option value="PS">Palestine, State of</option>
+    <option value="PA">Panama</option>
+    <option value="PG">Papua New Guinea</option>
+    <option value="PY">Paraguay</option>
+    <option value="PE">Peru</option>
+    <option value="PH">Philippines</option>
+    <option value="PN">Pitcairn</option>
+    <option value="PL">Poland</option>
+    <option value="PT">Portugal</option>
+    <option value="PR">Puerto Rico</option>
+    <option value="QA">Qatar</option>
+    <option value="RO">Romania</option>
+    <option value="RU">Russia</option>
+    <option value="RW">Rwanda</option>
+    <option value="RE">Réunion</option>
+    <option value="BL">Saint Barthélemy</option>
+    <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+    <option value="KN">Saint Kitts and Nevis</option>
+    <option value="LC">Saint Lucia</option>
+    <option value="MF">Saint Martin (French part)</option>
+    <option value="PM">Saint Pierre and Miquelon</option>
+    <option value="VC">Saint Vincent and the Grenadines</option>
+    <option value="WS">Samoa</option>
+    <option value="SM">San Marino</option>
+    <option value="ST">Sao Tome and Principe</option>
+    <option value="SA">Saudi Arabia</option>
+    <option value="SN">Senegal</option>
+    <option value="RS">Serbia</option>
+    <option value="SC">Seychelles</option>
+    <option value="SL">Sierra Leone</option>
+    <option value="SG">Singapore</option>
+    <option value="SX">Sint Maarten (Dutch part)</option>
+    <option value="SK">Slovakia</option>
+    <option value="SI">Slovenia</option>
+    <option value="SB">Solomon Islands</option>
+    <option value="SO">Somalia</option>
+    <option value="ZA">South Africa</option>
+    <option value="GS">South Georgia and the South Sandwich Islands</option>
+    <option value="SS">South Sudan</option>
+    <option value="ES">Spain</option>
+    <option value="LK">Sri Lanka</option>
+    <option value="SD">Sudan</option>
+    <option value="SR">Suriname</option>
+    <option value="SJ">Svalbard and Jan Mayen</option>
+    <option value="SE">Sweden</option>
+    <option value="CH">Switzerland</option>
+    <option value="SY">Syrian Arab Republic</option>
+    <option value="TW">Taiwan</option>
+    <option value="TJ">Tajikistan</option>
+    <option value="TZ">Tanzania, United Republic of</option>
+    <option value="TH">Thailand</option>
+    <option value="TL">Timor-Leste</option>
+    <option value="TG">Togo</option>
+    <option value="TK">Tokelau</option>
+    <option value="TO">Tonga</option>
+    <option value="TT">Trinidad and Tobago</option>
+    <option value="TN">Tunisia</option>
+    <option value="TM">Turkmenistan</option>
+    <option value="TC">Turks and Caicos Islands</option>
+    <option value="TV">Tuvalu</option>
+    <option value="TR">Türkiye</option>
+    <option value="UG">Uganda</option>
+    <option value="UA">Ukraine</option>
+    <option value="AE">United Arab Emirates</option>
+    <option value="GB">United Kingdom</option>
+    <option value="US">United States</option>
+    <option value="UM">United States Minor Outlying Islands</option>
+    <option value="UY">Uruguay</option>
+    <option value="UZ">Uzbekistan</option>
+    <option value="VU">Vanuatu</option>
+    <option value="VE">Venezuela, Bolivarian Republic of</option>
+    <option value="VN">Vietnam</option>
+    <option value="VG">Virgin Islands, British</option>
+    <option value="VI">Virgin Islands, U.S.</option>
+    <option value="WF">Wallis and Futuna</option>
+    <option value="EH">Western Sahara</option>
+    <option value="YE">Yemen</option>
+    <option value="ZM">Zambia</option>
+    <option value="ZW">Zimbabwe</option>
+    <option value="AX">Åland Islands</option>
+
+</select>
+
+                    <div
+                        class="field-err-msg"
+                        id="err-country"
+                    >
+                        Please select your country.
+                    </div>
+
+                </div>
+
+
+
+                <!-- MESSAGE -->
+
+                <div class="form-field">
+
+                    <label for="message">
+                        Please let us know how can we be of help
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Message"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- CONSENT -->
+
+                <div class="consent-row">
+
+                    <input
+                        type="checkbox"
+                        id="consent"
+                        name="consent"
+                    >
+
+                    <label for="consent">
+
+                        I agree to receive marketing communications
+                        from FreightX and am providing express consent
+                        to receive these messages. This includes both
+                        emails and phone calls. For more information
+                        read our
+                        <a href="https://www.freightx.ai/legal/privacy-policy" target="_blank">
+                            Privacy Policy
+                        </a>.
+
+                    </label>
+
+                </div>
+
+
+                <div
+                    class="consent-err-msg"
+                    id="err-consent"
+                >
+                    You must agree to continue.
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <div class="submit-row">
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+                        Submit
+                    </button>
+
+                    <span class="mandatory-note">
+                        <span>*</span>
+                        Mandatory field
+                    </span>
+
+                </div>
+
+            </form>
+
+
+
+            <!-- SUCCESS -->
+
+            <div
+                class="form-success"
+                id="formSuccess"
+            >
+
+                <div class="tick">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+
+                        <polyline points="20 6 9 17 4 12"></polyline>
+
+                    </svg>
+
+                </div>
+
+                <h3>
+                    Thank you!
+                </h3>
+
+                <p>
+                    Your request has been submitted.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="footer">
+
+        <img src="data:image/png;base64,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" width="145" alt="FreightX" style="width:145px;max-width:145px;height:auto;margin:0 auto;">
+
+
+        <div class="footer-tagline">
+            AI For Logistics
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#" target="_blank">
+                Unsubscribe
+            </a>
+
+            <span class="separator">
+                |
+            </span>
+
+            <a
+                href="https://www.freightx.ai/"
+                target="_blank"
+            >
+                Website
+            </a>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        var freeEmails = [
+            'gmail.com',
+            'yahoo.com',
+            'hotmail.com',
+            'outlook.com',
+            'rediffmail.com',
+            'ymail.com',
+            'icloud.com',
+            'live.com',
+            'aol.com',
+            'mail.com',
+            'protonmail.com'
+        ];
+
+
+        /* PDF / REDIRECT URL */
+
+        var URL =
+            'https://www.youtube.com/watch?feature=shared&v=BX5ExRIavFM';
+
+
+        /* =====================================================
+           FIELD ERROR
+        ====================================================== */
+
+        function setFieldError(id, show, msg) {
+
+            var input = document.getElementById(id);
+
+            var errEl =
+                document.getElementById('err-' + id);
+
+            if (!input || !errEl) {
+                return;
+            }
+
+            input.classList.toggle(
+                'f-err',
+                show
+            );
+
+            if (msg) {
+                errEl.textContent = msg;
+            }
+
+            errEl.classList.toggle(
+                'show',
+                show
+            );
+
+        }
+
+
+
+        /* =====================================================
+           PHONE
+        ====================================================== */
+
+        document
+            .getElementById('phone')
+            .addEventListener(
+                'input',
+                function () {
+
+                    this.value =
+                        this.value.replace(/\D/g, '');
+
+                }
+            );
+
+
+
+        /* =====================================================
+           FORM SUBMIT
+        ====================================================== */
+
+        document
+            .getElementById('leadForm')
+            .addEventListener(
+                'submit',
+                function (e) {
+
+                    e.preventDefault();
+
+                    var valid = true;
+
+
+                    var firstName =
+                        document
+                            .getElementById('firstName')
+                            .value
+                            .trim();
+
+
+                    var lastName =
+                        document
+                            .getElementById('lastName')
+                            .value
+                            .trim();
+
+
+                    var jobTitle =
+                        document
+                            .getElementById('jobTitle')
+                            .value
+                            .trim();
+
+
+                    var company =
+                        document
+                            .getElementById('companyName')
+                            .value
+                            .trim();
+
+
+                    var phone =
+                        document
+                            .getElementById('phone')
+                            .value
+                            .trim();
+
+
+                    var email =
+                        document
+                            .getElementById('email')
+                            .value
+                            .trim();
+
+
+                    var employees =
+                        document
+                            .getElementById('employees')
+                            .value;
+
+
+                    var country =
+                        document
+                            .getElementById('country')
+                            .value;
+
+
+                    var consent =
+                        document
+                            .getElementById('consent')
+                            .checked;
+
+
+
+                    /* FIRST NAME */
+
+                    if (!firstName) {
+
+                        setFieldError(
+                            'firstName',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'firstName',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* LAST NAME */
+
+                    if (!lastName) {
+
+                        setFieldError(
+                            'lastName',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'lastName',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* JOB TITLE */
+
+                    if (!jobTitle) {
+
+                        setFieldError(
+                            'jobTitle',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'jobTitle',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* COMPANY */
+
+                    if (!company) {
+
+                        setFieldError(
+                            'companyName',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'companyName',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* PHONE */
+
+                    var phoneClean =
+                        phone.replace(
+                            /[\s\-\(\)\+\.]/g,
+                            ''
+                        );
+
+
+                    if (
+                        !phone ||
+                        phoneClean.length < 6 ||
+                        phoneClean.length > 12 ||
+                        !/^\d+$/.test(phoneClean)
+                    ) {
+
+                        setFieldError(
+                            'phone',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'phone',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* EMAIL */
+
+                    var emailRx =
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                    var domain =
+                        (
+                            email.split('@')[1] ||
+                            ''
+                        ).toLowerCase();
+
+
+                    if (
+                        !email ||
+                        !emailRx.test(email)
+                    ) {
+
+                        setFieldError(
+                            'email',
+                            true,
+                            'Please enter a valid email address.'
+                        );
+
+                        valid = false;
+
+                    } else if (
+                        freeEmails.indexOf(domain) !== -1
+                    ) {
+
+                        setFieldError(
+                            'email',
+                            true,
+                            'Please use a business email address.'
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'email',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* EMPLOYEES */
+
+                    if (!employees) {
+
+                        setFieldError(
+                            'employees',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'employees',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* COUNTRY */
+
+                    if (!country) {
+
+                        setFieldError(
+                            'country',
+                            true
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        setFieldError(
+                            'country',
+                            false
+                        );
+
+                    }
+
+
+
+                    /* CONSENT */
+
+                    var consentErr =
+                        document.getElementById(
+                            'err-consent'
+                        );
+
+
+                    if (!consent) {
+
+                        consentErr.classList.add(
+                            'show'
+                        );
+
+                        valid = false;
+
+                    } else {
+
+                        consentErr.classList.remove(
+                            'show'
+                        );
+
+                    }
+
+
+
+                    /* STOP IF INVALID */
+
+                    if (!valid) {
+                        return;
+                    }
+
+
+
+                    /* SHOW SUCCESS */
+
+                    document
+                        .getElementById('leadForm')
+                        .style.display = 'none';
+
+
+                    document
+                        .getElementById('formSuccess')
+                        .style.display = 'flex';
+
+
+
+                    /* DOWNLOAD */
+
+                    setTimeout(
+                        function () {
+
+                            var link =
+                                document.createElement('a');
+
+                            link.href = URL;
+
+                            link.setAttribute(
+                                'download',
+                                ''
+                            );
+
+                            document.body.appendChild(
+                                link
+                            );
+
+                            link.click();
+
+                            document.body.removeChild(
+                                link
+                            );
+
+                        },
+                        600
+                    );
+
+                }
+            );
+
+    </script>
+
+    <script>
+document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+        var targetId = this.getAttribute('href');
+
+        if (targetId === '#') return;
+
+        var target = document.querySelector(targetId);
+
+        if (target) {
+            e.preventDefault();
+
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>
