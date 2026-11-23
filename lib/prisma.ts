@@ -1,3 +1,4 @@
+
 import "dotenv/config";
 
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
@@ -11,14 +12,20 @@ if (!databaseUrl) {
 
 const url = new URL(databaseUrl);
 
+// Enable TLS when the connection URL requires strict SSL.
+// Your local MySQL URL can continue working without SSL.
+const useSsl = url.searchParams.get("sslaccept") === "strict";
+
 const adapter = new PrismaMariaDb({
   host: url.hostname,
   port: Number(url.port) || 3306,
   user: decodeURIComponent(url.username),
   password: decodeURIComponent(url.password),
-  database: url.pathname.replace("/", ""),
+  database: decodeURIComponent(url.pathname.replace(/^\/+/, "")),
   connectionLimit: 5,
   connectTimeout: 10000,
+  acquireTimeout: 10000,
+  ssl: useSsl,
 });
 
 const globalForPrisma = globalThis as unknown as {
