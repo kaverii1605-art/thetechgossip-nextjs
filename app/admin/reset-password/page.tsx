@@ -1,9 +1,10 @@
+
 "use client";
 
-import { FormEvent, useState } from "react";
+import { Suspense, FormEvent, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -113,15 +114,10 @@ export default function ResetPasswordPage() {
     }
   }
 
-  /* ==========================================
-     PASSWORD RESET FORM
-  ========================================== */
-
   if (token) {
     return (
       <main className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-
           <h1 className="text-3xl font-bold text-center text-[#0B1F4D]">
             Create New Password
           </h1>
@@ -134,7 +130,6 @@ export default function ResetPasswordPage() {
             onSubmit={handleResetPassword}
             className="space-y-5"
           >
-
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 New Password
@@ -159,9 +154,7 @@ export default function ResetPasswordPage() {
               <input
                 type="password"
                 value={confirmPassword}
-                onChange={(e) =>
-                  setConfirmPassword(e.target.value)
-                }
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm new password"
                 required
                 minLength={6}
@@ -186,25 +179,17 @@ export default function ResetPasswordPage() {
               disabled={loading}
               className="w-full bg-[#0B1F4D] text-white py-3 rounded-lg font-semibold hover:bg-blue-900 disabled:opacity-50"
             >
-              {loading
-                ? "Updating Password..."
-                : "Update Password"}
+              {loading ? "Updating Password..." : "Update Password"}
             </button>
-
           </form>
         </div>
       </main>
     );
   }
 
-  /* ==========================================
-     REQUEST RESET LINK FORM
-  ========================================== */
-
   return (
     <main className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-
         <h1 className="text-3xl font-bold text-center text-[#0B1F4D]">
           Reset Password
         </h1>
@@ -217,7 +202,6 @@ export default function ResetPasswordPage() {
           onSubmit={handleRequestReset}
           className="space-y-5"
         >
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Admin Email
@@ -250,16 +234,12 @@ export default function ResetPasswordPage() {
             disabled={loading}
             className="w-full bg-[#0B1F4D] text-white py-3 rounded-lg font-semibold hover:bg-blue-900 disabled:opacity-50"
           >
-            {loading
-              ? "Generating Reset Link..."
-              : "Generate Reset Link"}
+            {loading ? "Generating Reset Link..." : "Generate Reset Link"}
           </button>
-
         </form>
 
         {resetLink && (
           <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-
             <p className="text-sm font-semibold text-[#0B1F4D] mb-2">
               Password Reset Link
             </p>
@@ -274,11 +254,23 @@ export default function ResetPasswordPage() {
             <p className="text-xs text-gray-500 mt-3">
               This development link expires in 30 minutes.
             </p>
-
           </div>
         )}
-
       </div>
     </main>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-gray-100 flex items-center justify-center">
+          <p className="text-gray-600">Loading password reset page...</p>
+        </main>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

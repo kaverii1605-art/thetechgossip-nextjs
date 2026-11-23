@@ -4,8 +4,12 @@ import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
+export const dynamic = "force-dynamic";
+
 async function deleteNews(formData: FormData) {
   "use server";
+
+  
 
   const id = Number(formData.get("id"));
 
