@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { getImageUrl } from "@/lib/imageUrl";
 
 type Post = {
   id: number;
@@ -109,7 +110,7 @@ export default function NewsSection() {
               >
                 {post.image && (
                   <img
-                    src={post.image}
+                    src={getImageUrl(post.image)}
                     alt={post.heading}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />

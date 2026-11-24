@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
+import { getImageUrl } from "@/lib/imageUrl";
+
 const categoryLabels: Record<string, string> = {
   "commerce-sales": "Commerce & Sales",
   "affiliate-marketing-management": "Affiliate Marketing & Management",
@@ -375,7 +377,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           >
             {post.image ? (
               <img
-                src={post.image}
+                src={getImageUrl(post.image)}
                 alt={post.heading}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

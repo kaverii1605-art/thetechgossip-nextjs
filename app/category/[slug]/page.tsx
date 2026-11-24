@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
+import { getImageUrl } from "@/lib/imageUrl";
+
 type NewsPost = {
   id: string | number;
   heading: string;
@@ -159,7 +161,7 @@ export default function CategoryPage() {
                   <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
                     {post.image ? (
                       <img
-                        src={post.image}
+                        src={getImageUrl(post.image)}
                         alt={post.heading}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
