@@ -46,9 +46,7 @@ export async function POST(request: Request) {
 
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        {
-          error: "Please select a JPG, PNG, WEBP or GIF image.",
-        },
+        { error: "Please select a JPG, PNG, WEBP or GIF image." },
         { status: 400 }
       );
     }
@@ -61,11 +59,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Convert image into a buffer
+    // Convert image into buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Upload image to Cloudinary
+    // Upload to Cloudinary
     const result = await new Promise<{ secure_url: string }>(
       (resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
@@ -76,6 +74,12 @@ export async function POST(request: Request) {
           },
           (error, uploadedImage) => {
             if (error) {
+              console.error("Cloudinary detailed upload error:", {
+                message: error.message,
+                name: error.name,
+                http_code: error.http_code,
+              });
+
               reject(error);
               return;
             }
@@ -99,19 +103,25 @@ export async function POST(request: Request) {
       message: "Image uploaded successfully.",
       image: result.secure_url,
     });
+
   } catch (error) {
-  console.error("Cloudinary image upload error:", error);
+    console.error("Cloudinary upload API error:", {
+      message: error instanceof Error ? error.message : "Unknown error",
+      name: error instanceof Error ? error.name : "Unknown",
+      http_code:
+        typeof error === "object" && error !== null && "http_code" in error
+          ? error.http_code
+          : undefined,
+    });
 
-  const message =
-    error instanceof Error
-      ? error.message
-      : "Unknown upload error";
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Unknown upload error";
 
-  return NextResponse.json(
-    {
-      error: message,
-    },
-    { status: 500 }
-  );
-}
+    return NextResponse.json(
+      { error: message },
+      { status: 500 }
+    );
+  }
 }
