@@ -1,9 +1,10 @@
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-
 import { marked } from "marked";
 import DOMPurify from "isomorphic-dompurify";
+import { getImageUrl } from "@/lib/imageUrl";
 
 type NewsDetailPageProps = {
   params: Promise<{
@@ -11,20 +12,18 @@ type NewsDetailPageProps = {
   }>;
 };
 
-// Convert plain text to paragraphs while preserving existing HTML.
-
-
-
-
-function formatArticleContent(content: string | null | undefined) {
+// Format article content
+function formatArticleContent(
+  content: string | null | undefined
+) {
   if (!content?.trim()) return "";
 
-  // Preserve HTML content from the database.
-  if (/<\/?[a-z][\s\S]*?>/i.test(content)) {
+  // Preserve existing HTML
+  if (/<[a-z][\s\S]*>/i.test(content)) {
     return content;
   }
 
-  // Convert plain text into paragraphs.
+  // Escape plain text
   const escaped = content
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -32,6 +31,7 @@ function formatArticleContent(content: string | null | undefined) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 
+  // Convert plain text into paragraphs
   return escaped
     .split(/\r?\n\s*\r?\n/)
     .map((paragraph) => paragraph.trim())
@@ -41,6 +41,7 @@ function formatArticleContent(content: string | null | undefined) {
 
       if (heading) {
         const level = paragraph.match(/^#+/)![0].length;
+
         return `<h${level}>${heading[1]}</h${level}>`;
       }
 
@@ -48,8 +49,6 @@ function formatArticleContent(content: string | null | undefined) {
     })
     .join("\n");
 }
-
-
 
 export default async function NewsDetailPage({
   params,
@@ -66,9 +65,11 @@ export default async function NewsDetailPage({
 
   const articleContent = formatArticleContent(post.content);
 
-  const formattedContent = DOMPurify.sanitize(
-  await marked.parse(articleContent || "")
-);
+  const parsedContent = await marked.parse(articleContent || "");
+
+  const formattedContent = DOMPurify.sanitize(parsedContent);
+
+  const imageUrl = getImageUrl(post.image);
 
   return (
     <main className="min-h-screen bg-white text-[#182033]">
@@ -89,9 +90,7 @@ export default async function NewsDetailPage({
             {post.heading}
           </h1>
 
-       
-
-          <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-black-300">
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-gray-500">
             <time dateTime={new Date(post.createdAt).toISOString()}>
               {new Date(post.createdAt).toLocaleDateString("en-US", {
                 month: "long",
@@ -112,76 +111,75 @@ export default async function NewsDetailPage({
       </section>
 
       {/* ARTICLE BODY AND SIDEBAR */}
-    <section className="mx-auto max-w-[1200px] bg-[#F8F8FC] px-5 py-6 md:px-10 md:py-8">
-  <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-8">
+      <section className="mx-auto max-w-[1200px] bg-[#F8F8FC] px-5 py-6 md:px-10 md:py-8">
+
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-8">
+
           {/* MAIN ARTICLE */}
-         <article className="min-w-0">
+          <article className="min-w-0">
 
-  {/* FEATURED IMAGE */}
-  {post.image && (
-    <figure className="mb-5 overflow-hidden rounded-lg bg-gray-100">
-      <img
-        src={post.image}
-        alt={post.heading}
-        className="block h-auto max-h-[420px] w-full object-cover object-center"
-      />
-    </figure>
-  )}
+            {/* FEATURED IMAGE */}
+            {post.image && (
+              <figure className="mb-5 overflow-hidden rounded-lg bg-gray-100">
+                <img
+                  src={imageUrl}
+                  alt={post.heading}
+                  className="block h-auto max-h-[420px] w-full object-cover object-center"
+                />
+              </figure>
+            )}
 
-  {/* SUBHEADING BELOW IMAGE */}
-  {post.subHeading && (
-    <p className="mb-6 text-base font-medium leading-7 text-[#0B1235] md:text-lg">
-      {post.subHeading}
-    </p>
-  )}
+            {/* SUBHEADING */}
+            {post.subHeading && (
+              <p className="mb-6 text-base font-medium leading-7 text-[#0B1235] md:text-lg">
+                {post.subHeading}
+              </p>
+            )}
 
-  {/* ARTICLE CONTENT */}
-  
+            {/* ARTICLE CONTENT */}
+            <div
+              className="
+                article-content
+                w-full min-w-0
+                whitespace-normal break-words
+                leading-[1.75] text-[#52617F]
 
-<div
-  className="
-    article-content
-    w-full min-w-0
-    whitespace-normal break-words
-     leading-[1.75] text-[#52617F]
+                [&_p]:mb-4
+                [&_p]:leading-[1.75]
 
-    [&_p]:mb-4
-    [&_p]:leading-[1.75]
+                [&_h1]:mt-6 [&_h1]:mb-3
+                [&_h1]:text-[23px] [&_h1]:font-bold
+                [&_h1]:leading-tight [&_h1]:text-[#0B1235]
 
-    [&_h1]:mt-6 [&_h1]:mb-3
-    [&_h1]:text-[23px] [&_h1]:font-bold
-    [&_h1]:leading-tight [&_h1]:text-[#0B1235]
+                [&_h2]:mt-6 [&_h2]:mb-3
+                [&_h2]:text-[21px] [&_h2]:font-bold
+                [&_h2]:leading-tight [&_h2]:text-[#0B1235]
 
-    [&_h2]:mt-6 [&_h2]:mb-3
-    [&_h2]:text-[21px] [&_h2]:font-bold
-    [&_h2]:leading-tight [&_h2]:text-[#0B1235]
+                [&_h3]:mt-5 [&_h3]:mb-2
+                [&_h3]:text-base [&_h3]:font-bold
+                [&_h3]:text-[#0B1235]
 
-    [&_h3]:mt-5 [&_h3]:mb-2
-    [&_h3]:text-base [&_h3]:font-bold
-    [&_h3]:text-[#0B1235]
+                [&_strong]:font-semibold
+                [&_strong]:text-[#263755]
 
-    [&_strong]:font-semibold
-    [&_strong]:text-[#263755]
+                [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-5
+                [&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-5
+                [&_li]:mb-1
 
-    [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-5
-    [&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-5
-    [&_li]:mb-1
+                [&_a]:text-[#078B8D]
+                [&_a]:underline
 
-    [&_a]:text-[#078B8D]
-    [&_a]:underline
+                [&_blockquote]:my-5
+                [&_blockquote]:border-l-2
+                [&_blockquote]:border-[#078B8D]
+                [&_blockquote]:pl-4
+              "
+              dangerouslySetInnerHTML={{
+                __html: formattedContent,
+              }}
+            />
 
-    [&_blockquote]:my-5
-    [&_blockquote]:border-l-2
-    [&_blockquote]:border-[#078B8D]
-    [&_blockquote]:pl-4
-  "
-dangerouslySetInnerHTML={{ __html: formattedContent }}
-/>
-
-
-
-
-</article>
+          </article>
 
           {/* RIGHT SIDEBAR */}
           <aside className="lg:sticky lg:top-8">

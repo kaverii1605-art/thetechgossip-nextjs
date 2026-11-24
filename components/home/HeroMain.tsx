@@ -1,4 +1,6 @@
+
 import Link from "next/link";
+import { getImageUrl } from "@/lib/imageUrl";
 
 type HeroMainProps = {
   image?: string | null;
@@ -20,11 +22,10 @@ export default function HeroMain({
       href={`/news/${slug}`}
       className="relative block h-[560px] overflow-hidden rounded-2xl group"
     >
-
       {/* IMAGE */}
       {image ? (
         <img
-          src={image}
+          src={getImageUrl(image)}
           alt={title}
           className="
             absolute
@@ -41,7 +42,6 @@ export default function HeroMain({
         <div className="absolute inset-0 bg-gray-300" />
       )}
 
-
       {/* GRADIENT */}
       <div
         className="
@@ -53,7 +53,6 @@ export default function HeroMain({
           to-black/5
         "
       />
-
 
       {/* CONTENT */}
       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-10 text-white">
@@ -78,9 +77,7 @@ export default function HeroMain({
           {category}
         </span>
 
-
         {/* TITLE */}
-              
         <h1
           className="
             mt-4
@@ -105,7 +102,6 @@ export default function HeroMain({
         {/* DATE */}
         {date && (
           <div className="flex items-center gap-3 mt-5 text-sm text-gray-200">
-
             <span>
               {new Date(date).toLocaleDateString("en-US", {
                 month: "long",
@@ -113,14 +109,9 @@ export default function HeroMain({
                 year: "numeric",
               })}
             </span>
-
-            
-
           </div>
         )}
-
       </div>
-
     </Link>
   );
 }

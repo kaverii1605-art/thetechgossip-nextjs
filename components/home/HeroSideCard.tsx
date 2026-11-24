@@ -1,4 +1,6 @@
+
 import Link from "next/link";
+import { getImageUrl } from "@/lib/imageUrl";
 
 type HeroSideCardProps = {
   image?: string | null;
@@ -27,11 +29,10 @@ export default function HeroSideCard({
         group
       "
     >
-
       {/* IMAGE */}
       {image ? (
         <img
-          src={image}
+          src={getImageUrl(image)}
           alt={title}
           className="
             absolute
@@ -48,7 +49,6 @@ export default function HeroSideCard({
         <div className="absolute inset-0 bg-gray-300" />
       )}
 
-
       {/* OVERLAY */}
       <div
         className="
@@ -60,7 +60,6 @@ export default function HeroSideCard({
           to-black/5
         "
       />
-
 
       {/* CONTENT */}
       <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
@@ -82,12 +81,21 @@ export default function HeroSideCard({
           {category}
         </span>
 
-
         {/* TITLE */}
-        <h2 className="text-white text-xl font-bold transition-all duration-200 hover:underline hover:decoration-white decoration-2 underline-offset-4">
-  {title}
-</h2>
-
+        <h2 className="
+          mt-2
+          text-white
+          text-xl
+          font-bold
+          transition-all
+          duration-200
+          group-hover:underline
+          group-hover:decoration-white
+          decoration-2
+          underline-offset-4
+        ">
+          {title}
+        </h2>
 
         {/* DATE */}
         {date && (
@@ -101,7 +109,6 @@ export default function HeroSideCard({
         )}
 
       </div>
-
     </Link>
   );
 }
