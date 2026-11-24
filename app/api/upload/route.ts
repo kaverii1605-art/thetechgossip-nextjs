@@ -100,11 +100,18 @@ export async function POST(request: Request) {
       image: result.secure_url,
     });
   } catch (error) {
-    console.error("Cloudinary image upload error:", error);
+  console.error("Cloudinary image upload error:", error);
 
-    return NextResponse.json(
-      { error: "Unable to upload image. Please try again." },
-      { status: 500 }
-    );
-  }
+  const message =
+    error instanceof Error
+      ? error.message
+      : "Unknown upload error";
+
+  return NextResponse.json(
+    {
+      error: message,
+    },
+    { status: 500 }
+  );
+}
 }
