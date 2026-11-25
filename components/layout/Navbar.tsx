@@ -115,7 +115,7 @@ const isInsightsActive = insightsPaths.some(
           {/* Logo */}
           <Link href="/">
             <Image
-              src="/images/TheTechGossipLogo.png"
+              src="/images/thetechgossip-logo.png"
               alt="The Tech Gossip"
               width={300}
               height={100}

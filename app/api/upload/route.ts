@@ -1,31 +1,30 @@
 
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/auth";
-import { v2 as cloudinary } from "cloudinary";
+import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
 
+
+const ALLOWED_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+];
+
 export async function POST(request: Request) {
   try {
-    // Check admin login
+    // Only logged-in admins can upload images.
     const session = await getAdminSession();
 
     if (!session) {
       return NextResponse.json(
-        { error: "Please log in as an admin." },
+        { error: "Unauthorized. Please log in as admin." },
         { status: 401 }
       );
     }
 
-    // Check Cloudinary configuration
-    if (!process.env.CLOUDINARY_URL) {
-      return NextResponse.json(
-        { error: "Cloudinary is not configured." },
-        { status: 500 }
-      );
-    }
-
-    // Get uploaded image
     const formData = await request.formData();
     const file = formData.get("image");
 
@@ -36,105 +35,38 @@ export async function POST(request: Request) {
       );
     }
 
-    // Allowed image formats
-    const allowedTypes = [
-      "image/jpeg",
-      "image/png",
-      "image/webp",
-      "image/gif",
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
+    if (!ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { error: "Please select a JPG, PNG, WEBP or GIF image." },
+        { error: "Only JPG, PNG, WEBP and GIF images are allowed." },
         { status: 400 }
       );
     }
 
-    // Maximum image size: 5 MB
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json(
-        { error: "Image size must be 5 MB or less." },
-        { status: 400 }
-      );
-    }
+   
 
-    // Convert image into buffer
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    // Convert the uploaded image into bytes.
+    const imageBytes = new Uint8Array(await file.arrayBuffer());
 
-    // Upload to Cloudinary
-    const result = await new Promise<{ secure_url: string }>(
-      (resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-          {
-            folder: "thetechgossip/news",
-            resource_type: "image",
-            allowed_formats: ["jpg", "jpeg", "png", "webp", "gif"],
-          },
-          (error, uploadedImage) => {
-            if (error) {
-              console.error("Cloudinary detailed upload error:", {
-                message: error.message,
-                name: error.name,
-                http_code: error.http_code,
-              });
+    // Save the image directly in MySQL.
+    const uploadedImage = await prisma.uploadedImage.create({
+      data: {
+        fileName: file.name,
+        mimeType: file.type,
+        data: imageBytes,
+      },
+    });
 
-              reject(error);
-              return;
-            }
-
-            if (!uploadedImage) {
-              reject(new Error("Cloudinary returned no image."));
-              return;
-            }
-
-            resolve({
-              secure_url: uploadedImage.secure_url,
-            });
-          }
-        );
-
-        uploadStream.end(buffer);
-      }
-    );
-
+    // Return the image URL to the existing admin form.
     return NextResponse.json({
-      message: "Image uploaded successfully.",
-      image: result.secure_url,
+      message: "Image saved successfully.",
+      image: `/api/images/${uploadedImage.id}`,
     });
+  } catch (error) {
+    console.error("Image upload error:", error);
 
-  } catch (error: unknown) {
-  console.error("Cloudinary upload API detailed error:", error);
-
-  let message = "Unknown upload error";
-
-  if (error instanceof Error) {
-    message = error.message;
-  } else if (typeof error === "string") {
-    message = error;
-  } else if (typeof error === "object" && error !== null) {
-    const cloudinaryError = error as {
-      message?: string;
-      http_code?: number;
-      name?: string;
-    };
-
-    message =
-      cloudinaryError.message ||
-      JSON.stringify(error) ||
-      "Unknown upload error";
-
-    console.error("Cloudinary error details:", {
-      name: cloudinaryError.name,
-      message: cloudinaryError.message,
-      http_code: cloudinaryError.http_code,
-    });
+    return NextResponse.json(
+      { error: "Image upload failed. Please try again." },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json(
-    { error: message },
-    { status: 500 }
-  );
-}
 }
