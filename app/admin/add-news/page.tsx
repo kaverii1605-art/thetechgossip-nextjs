@@ -534,41 +534,32 @@ export default function AddNewsPage() {
 
       // Step 1: Upload the selected image.
 
-      if (imageFile) {
+    if (imageFile) {
+  const formData = new FormData();
+  formData.append("image", imageFile);
 
-        const formData = new FormData();
+  const uploadResponse = await fetch("/api/upload", {
+    method: "POST",
+    body: formData,
+  });
 
-        formData.append("image", imageFile);
+  const uploadData = await uploadResponse.json();
 
+  if (!uploadResponse.ok) {
+    setMessage(uploadData.error || "Image upload failed.");
+    return;
+  }
 
+  if (
+    typeof uploadData.image !== "string" ||
+    !uploadData.image.startsWith("https://")
+  ) {
+    setMessage("Image upload did not return a valid image URL.");
+    return;
+  }
 
-        const uploadResponse = await fetch("/api/upload", {
-
-          method: "POST",
-
-          body: formData,
-
-        });
-
-
-
-        const uploadData = await uploadResponse.json();
-
-
-
-        if (!uploadResponse.ok) {
-
-          setMessage(uploadData.error || "Image upload failed.");
-
-          return;
-
-        }
-
-
-
-        imagePath = uploadData.image;
-
-      }
+  imagePath = uploadData.image;
+}
 
 
 

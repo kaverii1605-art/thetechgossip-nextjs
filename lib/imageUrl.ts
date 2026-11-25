@@ -1,31 +1,30 @@
 
 export function getImageUrl(image?: string | null): string {
-  if (!image) return "/images/placeholder.png";
+  if (!image) {
+    return "/images/placeholder.png";
+  }
 
   const value = image.trim();
 
-  if (!value) return "/images/placeholder.png";
+  if (!value) {
+    return "/images/placeholder.png";
+  }
 
   // Keep Base64 image URLs unchanged
-  if (/^data:image\//i.test(value)) {
+  if (value.startsWith("data:image/")) {
     return value;
   }
 
-  // Correct malformed HTTP URLs, such as https:/example.com
-  if (/^https?:\/+[^/]/i.test(value)) {
-    return value.replace(/^(https?):\/+/i, "$1://");
-  }
-
-  // Keep valid external URLs unchanged
+  // Keep Cloudinary and other external image URLs unchanged
   if (/^https?:\/\//i.test(value)) {
     return value;
   }
 
-  // Remove accidental ./ prefix
-  const cleanPath = value.replace(/^\.\//, "");
+  // Keep root-relative local image paths unchanged
+  if (value.startsWith("/")) {
+    return value;
+  }
 
-  // Local image paths
-  return cleanPath.startsWith("/")
-    ? cleanPath
-    : `/${cleanPath}`;
+  // Convert relative local paths into root-relative paths
+  return `/${value.replace(/^\.\/+/, "")}`;
 }
