@@ -104,24 +104,37 @@ export async function POST(request: Request) {
       image: result.secure_url,
     });
 
-  } catch (error) {
-    console.error("Cloudinary upload API error:", {
-      message: error instanceof Error ? error.message : "Unknown error",
-      name: error instanceof Error ? error.name : "Unknown",
-      http_code:
-        typeof error === "object" && error !== null && "http_code" in error
-          ? error.http_code
-          : undefined,
+  } catch (error: unknown) {
+  console.error("Cloudinary upload API detailed error:", error);
+
+  let message = "Unknown upload error";
+
+  if (error instanceof Error) {
+    message = error.message;
+  } else if (typeof error === "string") {
+    message = error;
+  } else if (typeof error === "object" && error !== null) {
+    const cloudinaryError = error as {
+      message?: string;
+      http_code?: number;
+      name?: string;
+    };
+
+    message =
+      cloudinaryError.message ||
+      JSON.stringify(error) ||
+      "Unknown upload error";
+
+    console.error("Cloudinary error details:", {
+      name: cloudinaryError.name,
+      message: cloudinaryError.message,
+      http_code: cloudinaryError.http_code,
     });
-
-    const message =
-      error instanceof Error
-        ? error.message
-        : "Unknown upload error";
-
-    return NextResponse.json(
-      { error: message },
-      { status: 500 }
-    );
   }
+
+  return NextResponse.json(
+    { error: message },
+    { status: 500 }
+  );
+}
 }
