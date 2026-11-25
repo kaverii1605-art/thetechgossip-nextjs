@@ -1,4 +1,3 @@
-
 export function getImageUrl(image?: string | null): string {
   if (!image) {
     return "/images/placeholder.png";
@@ -15,16 +14,16 @@ export function getImageUrl(image?: string | null): string {
     return value;
   }
 
-  // Keep Cloudinary and other external image URLs unchanged
+  // Keep external image URLs unchanged
   if (/^https?:\/\//i.test(value)) {
     return value;
   }
 
-  // Keep root-relative local image paths unchanged
+  // Keep root-relative paths unchanged
   if (value.startsWith("/")) {
     return value;
   }
 
-  // Convert relative local paths into root-relative paths
+  // Convert relative paths to root-relative paths
   return `/${value.replace(/^\.\/+/, "")}`;
 }
