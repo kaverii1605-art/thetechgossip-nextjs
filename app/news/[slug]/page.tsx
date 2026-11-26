@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { marked } from "marked";
-import DOMPurify from "isomorphic-dompurify";
 import { getImageUrl } from "@/lib/imageUrl";
+import sanitizeHtml from "sanitize-html";
 
 type NewsDetailPageProps = {
   params: Promise<{
@@ -65,9 +65,22 @@ export default async function NewsDetailPage({
 
   const articleContent = formatArticleContent(post.content);
 
-  const parsedContent = await marked.parse(articleContent || "");
+ const parsedContent = await marked.parse(articleContent || "");
 
-  const formattedContent = DOMPurify.sanitize(parsedContent);
+const formattedContent = sanitizeHtml(parsedContent, {
+  allowedTags: [
+    ...sanitizeHtml.defaults.allowedTags,
+    "img",
+    "figure",
+    "figcaption",
+  ],
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    a: ["href", "name", "target", "rel"],
+    img: ["src", "srcset", "alt", "title", "width", "height", "loading"],
+  },
+  allowedSchemes: ["http", "https", "mailto", "tel"],
+});
 
   const imageUrl = getImageUrl(post.image);
 
