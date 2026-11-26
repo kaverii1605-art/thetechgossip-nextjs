@@ -127,7 +127,7 @@ return (
           {sidePost1 && (
             <div className="min-h-[230px] lg:min-h-0">
               <HeroSideCard
-                image={sidePost1.image}
+               image={getImageUrl(sidePost1.image)}
                 title={sidePost1.heading}
                 category={sidePost1.category}
                 slug={sidePost1.slug}
@@ -139,7 +139,7 @@ return (
           {sidePost2 && (
             <div className="min-h-[230px] lg:min-h-0">
               <HeroSideCard
-                image={sidePost2.image}
+                image={getImageUrl(sidePost2.image)}
                 title={sidePost2.heading}
                 category={sidePost2.category}
                 slug={sidePost2.slug}

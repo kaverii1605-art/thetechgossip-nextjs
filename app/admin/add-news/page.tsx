@@ -550,15 +550,15 @@ export default function AddNewsPage() {
     return;
   }
 
-  if (
-    typeof uploadData.image !== "string" ||
-    !uploadData.image.startsWith("https://")
-  ) {
-    setMessage("Image upload did not return a valid image URL.");
-    return;
-  }
+ if (
+  typeof uploadData.image !== "string" ||
+  !uploadData.image.trim()
+) {
+  setMessage("Image upload did not return a valid image path.");
+  return;
+}
 
-  imagePath = uploadData.image;
+imagePath = uploadData.image;
 }
 
 
