@@ -3,6 +3,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { getImageUrl } from "@/lib/imageUrl";
 
 export const dynamic = "force-dynamic";
 
@@ -91,7 +92,7 @@ export default async function AdminNewsPage() {
                       <div className="flex items-center gap-3">
                         {post.image ? (
                           <img
-                            src={post.image}
+                            src={getImageUrl(post.image)}
                             alt=""
                             className="h-14 w-20 rounded-md object-cover"
                           />

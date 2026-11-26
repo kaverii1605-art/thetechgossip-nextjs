@@ -164,3 +164,27 @@ export default function NewsSection() {
     </section>
   );
 }
+
+function getImageSrc(image?: string | null) {
+  if (!image) return "";
+
+  const src = image.trim();
+
+  // Base64 images
+  if (src.startsWith("data:image/")) {
+    return src;
+  }
+
+  // Correct accidentally malformed HTTPS URLs
+  if (src.startsWith("https:/") && !src.startsWith("https://")) {
+    return src.replace(/^https:\//, "https://");
+  }
+
+  // External image URLs
+  if (src.startsWith("http://") || src.startsWith("https://")) {
+    return src;
+  }
+
+  // Local image paths
+  return `/${src.replace(/^\/+/, "")}`;
+}

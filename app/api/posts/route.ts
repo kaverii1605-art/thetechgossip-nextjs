@@ -1,9 +1,8 @@
+
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-import { getAdminSession } from "@/lib/auth";
-
-// GET - Fetch all posts
+// GET - Fetch all published posts
 export async function GET() {
   try {
     const posts = await prisma.post.findMany({
@@ -15,11 +14,11 @@ export async function GET() {
       },
     });
 
-    return Response.json(posts);
+    return NextResponse.json(posts);
   } catch (error) {
     console.error("GET /api/posts error:", error);
 
-    return Response.json(
+    return NextResponse.json(
       { error: "Failed to load posts" },
       { status: 500 }
     );
@@ -43,16 +42,16 @@ export async function POST(request: Request) {
     } = body;
 
     // Required fields
-    if (!heading || !subHeading || !content || !category) {
+    if (!heading || !content || !category) {
       return NextResponse.json(
         {
-          error: "Heading, sub heading, content and category are required",
+          error: "Heading, content and category are required",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    // Create slug automatically
+    // Generate slug automatically
     const slug =
       heading
         .toLowerCase()
@@ -66,7 +65,7 @@ export async function POST(request: Request) {
     const post = await prisma.post.create({
       data: {
         heading,
-        subHeading,
+        subHeading: subHeading || null,
         slug,
         content,
         image: image || null,
@@ -77,17 +76,13 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(post, {
-      status: 201,
-    });
+    return NextResponse.json(post, { status: 201 });
   } catch (error) {
-    console.error("POST posts error:", error);
+    console.error("POST /api/posts error:", error);
 
     return NextResponse.json(
-      {
-        error: "Failed to create post",
-      },
-      { status: 500 },
+      { error: "Failed to create post" },
+      { status: 500 }
     );
   }
 }

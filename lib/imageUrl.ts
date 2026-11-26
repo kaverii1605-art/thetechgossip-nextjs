@@ -1,29 +1,29 @@
+
 export function getImageUrl(image?: string | null): string {
-  if (!image) {
-    return "/images/placeholder.png";
+  if (!image) return "";
+
+  const src = image.trim();
+
+  // Base64 images
+  if (src.startsWith("data:image/")) {
+    return src;
   }
 
-  const value = image.trim();
-
-  if (!value) {
-    return "/images/placeholder.png";
+  // Fix malformed URLs such as https:/example.com/image.jpg
+  if (/^https?:\/(?!\/)/i.test(src)) {
+    return src.replace(/^(https?):\//i, "$1://");
   }
 
-  // Keep Base64 image URLs unchanged
-  if (value.startsWith("data:image/")) {
-    return value;
+  // External image URLs
+  if (/^https?:\/\//i.test(src)) {
+    return src;
   }
 
-  // Keep external image URLs unchanged
-  if (/^https?:\/\//i.test(value)) {
-    return value;
-  }
+  // Remove "public/" and leading slashes
+  const cleanPath = src
+    .replace(/^public\//i, "")
+    .replace(/^\/+/, "");
 
-  // Keep root-relative paths unchanged
-  if (value.startsWith("/")) {
-    return value;
-  }
-
-  // Convert relative paths to root-relative paths
-  return `/${value.replace(/^\.\/+/, "")}`;
+  // Local images must be inside the public folder
+  return `/${cleanPath}`;
 }

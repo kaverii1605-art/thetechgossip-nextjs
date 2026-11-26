@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { getImageUrl } from "@/lib/imageUrl";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -148,7 +149,7 @@ export default async function EditNewsPage({ params }: Props) {
             />
             {post.image && (
               <img
-                src={post.image}
+                src={getImageUrl(post.image)}
                 alt="Current featured image"
                 className="mt-3 max-h-48 rounded-lg object-cover"
               />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import HeroMain from "./HeroMain";
 import HeroSideCard from "./HeroSideCard";
+import { getImageUrl } from "@/lib/imageUrl";
 
 type Post = {
   id: number;
@@ -112,7 +113,7 @@ return (
         {/* Main Featured Story */}
         <div className="min-w-0 lg:col-span-7">
           <HeroMain
-            image={mainPost.image}
+           image={getImageUrl(mainPost.image)}
             title={mainPost.heading}
             category={mainPost.category}
             date={mainPost.createdAt}
