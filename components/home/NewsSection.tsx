@@ -108,13 +108,26 @@ export default function NewsSection() {
                 href={`/news/${post.slug}`}
                 className="relative block aspect-[16/10] overflow-hidden bg-gradient-to-br from-[#122858] to-[#0B1235]"
               >
-                {post.image && (
-                  <img
-                    src={getImageUrl(post.image)}
-                    alt={post.heading}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                )}
+              {post.image ? (
+  <img
+    src={getImageUrl(post.image)}
+    alt={post.heading}
+    className="h-full w-full object-cover"
+    onLoad={(e) => {
+      console.log("IMAGE LOADED:", e.currentTarget.src);
+    }}
+    onError={(e) => {
+      console.error("IMAGE FAILED:", {
+        originalImage: post.image,
+        imageUrl: getImageUrl(post.image),
+      });
+    }}
+  />
+) : (
+  <div className="flex h-full items-center justify-center text-white">
+    No image available
+  </div>
+)}
               </Link>
 
               <div className="flex flex-1 flex-col p-6">
