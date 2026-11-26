@@ -4,7 +4,7 @@ import "dotenv/config";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "../app/generated/prisma/client";
 
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl = process.env.LIVE_DATABASE_URL;
 
 if (!databaseUrl) {
   throw new Error("DATABASE_URL is not defined");
